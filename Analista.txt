@@ -1,0 +1,1 @@
+Levantar las necesidades del negocio para convertirlas en requerimientos del sistema 
