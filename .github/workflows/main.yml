@@ -34,30 +34,3 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-
-# PlantUML Action:
-
-- name: Generate Plantuml
-  uses: grassedge/generate-plantuml-action@v1.5
-
-
-name: PlantUML Action
-uses: Timmy/plantuml-action@v1
-
-name: Draw diagrams
-on: push
-
-jobs:
-  diagrams:
-    name: Draw diagrams
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Process diagrams
-        uses: Timmy/plantuml-action@v1
-        with:
-          args: '-tutxt diagrams/*.txt'
-      - name: Display diagrams
-        run: cat diagrams/*.utxt
-
