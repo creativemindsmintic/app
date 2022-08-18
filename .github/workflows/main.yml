@@ -37,6 +37,10 @@ jobs:
 
 # PlantUML Action:
 
+- name: Generate Plantuml
+  uses: grassedge/generate-plantuml-action@v1.5
+
+
 name: PlantUML Action
 uses: Timmy/plantuml-action@v1
 
