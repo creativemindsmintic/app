@@ -35,6 +35,3 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-#PlantUML Action:
-- name: PlantUML Action
-  uses: Timmy/plantuml-action@v1
