@@ -37,6 +37,9 @@ jobs:
 
 # PlantUML Action:
 
+name: PlantUML Action
+uses: Timmy/plantuml-action@v1
+
 name: Draw diagrams
 on: push
 
