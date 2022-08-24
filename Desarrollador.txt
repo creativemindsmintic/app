@@ -1,1 +1,0 @@
-Generar las fuentes para el frontend y el backend
