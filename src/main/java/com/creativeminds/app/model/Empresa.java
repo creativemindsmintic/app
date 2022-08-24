@@ -1,12 +1,30 @@
 package com.creativeminds.app.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Empresa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String Nombre;
     String Direccion;
     String telefono;
     String nit;
     Boolean activo;
+
+    public Empresa() {
+    }
+
+    public Empresa(String nombre, String direccion, String telefono, String nit) {
+        Nombre = nombre;
+        Direccion = direccion;
+        this.telefono = telefono;
+        this.nit = nit;
+    }
 
     public int getId() {
         return id;
