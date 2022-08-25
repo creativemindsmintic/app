@@ -5,10 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity //Asignacion tabla segun clase
 public class Empresa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //PK
+    @GeneratedValue(strategy = GenerationType.AUTO) //Autogenerado
     int id;
     String Nombre;
     String Direccion;

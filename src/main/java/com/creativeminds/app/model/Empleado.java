@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @Entity
 public class Empleado {
@@ -21,8 +25,8 @@ public class Empleado {
 
     }
 
-    public Empleado(int id, String nombre, String correo, String empresa, String rol, String cedula, Boolean activo) {
-        this.id = id;
+    public Empleado(String nombre, String correo, String empresa, String rol, String cedula, Boolean activo) {
+
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
@@ -86,4 +90,20 @@ public class Empleado {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+    //Metodo Crear Empleado
+    public void crearEmp() {  //Metodo recibe modelos
+
+    try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/app", "postgres", "1234554321"); Statement stmt = conn.createStatement();) {
+        String sql = "INSERT INTO empleado (nombre, correo, empresa, rol, cedula, activo) VALUES('" + this.getNombre() + "','" + this.getCorreo() + "','" + this.getEmpresa() + "','" + this.getRol() + "','" + this.getCedula() + "', '" + this.getActivo() + "')";
+        stmt.executeUpdate(sql);
+        System.out.println("Estudiante ingresado correctamente");
+    } catch (SQLException e) {
+
+        System.out.println("No se pudo registrar el estudiante");
+        e.printStackTrace();
+    }
+    }
+
+
 }
