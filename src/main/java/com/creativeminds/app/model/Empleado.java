@@ -1,28 +1,30 @@
 package com.creativeminds.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="empleado")
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String nombre;
-    String correo;
-    String empresa;
-    String rol;
-    String cedula;
-    Boolean activo;
+    private int id;
+    private String nombre;
+    @Column(name = "nombre", nullable = false, length = 80)
+    private String correo;
+    @Column(name = "correo", nullable = false, length = 50)
+    private String empresa;
+    @Column(name = "empresa", nullable = false, length = 90)
+    private String rol;
+    @Column(name = "rol", nullable = false, length = 20)
+    private String cedula;
+    @Column(name = "cedula", nullable = false, length = 20)
+    private Boolean activo;
 
     public Empleado(){
 
     }
 
-    public Empleado(int id, String nombre, String correo, String empresa, String rol, String cedula, Boolean activo) {
-        this.id = id;
+    public Empleado(String nombre, String correo, String empresa, String rol, String cedula, Boolean activo) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
@@ -31,15 +33,7 @@ public class Empleado {
         this.activo = activo;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
+        public String getNombre() {
         return nombre;
     }
 
