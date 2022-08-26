@@ -1,32 +1,33 @@
 package com.creativeminds.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.persistence.*;
 
 @Entity
+@Table(name="empleado")
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String nombre;
-    String correo;
-    String empresa;
-    String rol;
-    String cedula;
-    Boolean activo;
+    private int id;
+    @Column(name = "nombre", nullable = false, length = 80)
+    private String nombre;
+    @Column(name = "correo", nullable = false, length = 50)
+    private String correo;
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
+    @Column(name = "rol", nullable = false, length = 20)
+    private String rol;
 
+    @Column(name = "cedula", nullable = false, length = 20)
+    private String cedula;
+
+    @Column(name = "activo")
+    private Boolean activo;
     public Empleado(){
 
     }
 
-    public Empleado(String nombre, String correo, String empresa, String rol, String cedula, Boolean activo) {
-
+    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula, Boolean activo) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
@@ -59,11 +60,11 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public String getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
@@ -90,20 +91,4 @@ public class Empleado {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
-    //Metodo Crear Empleado
-    public void crearEmp() {  //Metodo recibe modelos
-
-    try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/app", "postgres", "1234554321"); Statement stmt = conn.createStatement();) {
-        String sql = "INSERT INTO empleado (nombre, correo, empresa, rol, cedula, activo) VALUES('" + this.getNombre() + "','" + this.getCorreo() + "','" + this.getEmpresa() + "','" + this.getRol() + "','" + this.getCedula() + "', '" + this.getActivo() + "')";
-        stmt.executeUpdate(sql);
-        System.out.println("Estudiante ingresado correctamente");
-    } catch (SQLException e) {
-
-        System.out.println("No se pudo registrar el estudiante");
-        e.printStackTrace();
-    }
-    }
-
-
 }
