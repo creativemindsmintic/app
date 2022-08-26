@@ -8,23 +8,26 @@ public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String nombre;
     @Column(name = "nombre", nullable = false, length = 80)
-    private String correo;
+    private String nombre;
     @Column(name = "correo", nullable = false, length = 50)
-    private String empresa;
-    @Column(name = "empresa", nullable = false, length = 90)
-    private String rol;
+    private String correo;
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
     @Column(name = "rol", nullable = false, length = 20)
-    private String cedula;
-    @Column(name = "cedula", nullable = false, length = 20)
-    private Boolean activo;
+    private String rol;
 
+    @Column(name = "cedula", nullable = false, length = 20)
+    private String cedula;
+
+    @Column(name = "activo")
+    private Boolean activo;
     public Empleado(){
 
     }
 
-    public Empleado(String nombre, String correo, String empresa, String rol, String cedula, Boolean activo) {
+    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula, Boolean activo) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
@@ -33,7 +36,15 @@ public class Empleado {
         this.activo = activo;
     }
 
-        public String getNombre() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
         return nombre;
     }
 
@@ -49,11 +60,11 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public String getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
