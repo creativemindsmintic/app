@@ -1,10 +1,6 @@
 package com.creativeminds.app.model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -12,26 +8,40 @@ public class MovimientoDinero {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
-    int user_id;
+    @ManyToOne
+    @JoinColumn(name = "empleado_id")
+    Empleado empleado;
     String tipo_movi;
     String concepto;
     Date fecha;
     Double monto;
 
-    public MovimientoDinero(int user_id, String tipo_movi, String concepto, Date fecha, Double monto) {
-        this.user_id = user_id;
+    public MovimientoDinero() {
+    }
+
+    public MovimientoDinero(int id, Empleado empleado, String tipo_movi, String concepto, Date fecha, Double monto) {
+        this.id = id;
+        this.empleado = empleado;
         this.tipo_movi = tipo_movi;
         this.concepto = concepto;
         this.fecha = fecha;
         this.monto = monto;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getId() {
+        return id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     public String getTipo_movi() {

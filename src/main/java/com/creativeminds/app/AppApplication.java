@@ -14,10 +14,6 @@ public class AppApplication {
 	@GetMapping("/")
 	public String home(){
 
-		Empleado empleado1 = new Empleado("Luis","and@gmail.com","Creative","Admin","1029642",true);
-
-		empleado1.crearEmp();
-
 		return "Bienvenidos a la app de Creative Minds" +
 				"<br> <img src=\"https://miviaje.com/wp-content/uploads/2018/09/cano-cristales.jpg\" alt=\"modelado\">";
 	}
