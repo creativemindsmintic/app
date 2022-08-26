@@ -8,22 +8,22 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     @Column(nullable = false,length = 50)
-    String Nombre;
+    String nombre;
     @Column(nullable = true,length = 90)
-    String Direccion;
+    String direccion;
     @Column(nullable = true,length = 10)
     String telefono;
     @Column(nullable = false,length = 15)
     String nit;
     @Column(name = "activo")
-    Boolean activo;
+    Boolean activo = true;
 
     public Empresa() {
     }
 
     public Empresa(String nombre, String direccion, String telefono, String nit) {
-        Nombre = nombre;
-        Direccion = direccion;
+        this.nombre = nombre;
+        this.direccion = direccion;
         this.telefono = telefono;
         this.nit = nit;
     }
@@ -37,19 +37,19 @@ public class Empresa {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getDireccion() {
-        return Direccion;
+        return direccion;
     }
 
     public void setDireccion(String direccion) {
-        Direccion = direccion;
+        this.direccion = direccion;
     }
 
     public String getTelefono() {
