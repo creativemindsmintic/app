@@ -1,6 +1,8 @@
 package com.creativeminds.app.controller;
 
+import com.creativeminds.app.model.Empleado;
 import com.creativeminds.app.model.Empresa;
+import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,5 +38,29 @@ public class AppController {
             return "redirect:/verEmpresas";
         }
         return "redirect:/crearEmpresa";
+    }
+    @Autowired
+    EmpleadoService empleadoService;
+
+    @GetMapping ({"/verEmpleados"})
+    public String verEmpleado(Model model){
+        List<Empleado> listaEmpleados = empleadoService.getAllEmpleado();
+        model.addAttribute("listadoEmpleados",listaEmpleados);
+        return "listadoEmpleados";
+    }
+
+    @GetMapping ({"/crearEmpleado"})
+    public String crearEmpleado(Model model){
+        Empleado nuevoEmpleado = new Empleado();
+        model.addAttribute("nuevoEmpleado",nuevoEmpleado);
+        return "crearEmpleado";
+    }
+
+    @PostMapping ({"/guardarEmpleado"})
+    public String guardarEmpleado(Empleado nuevoEmpleado, RedirectAttributes redirectAttributes){
+        if(empleadoService.saveorUpdateEmpleado(nuevoEmpleado) == true){
+            return "redirect:/verEmpleados";
+        }
+        return "redirect:/crearEmpleado";
     }
 }
