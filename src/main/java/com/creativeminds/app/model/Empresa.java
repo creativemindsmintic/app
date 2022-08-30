@@ -2,10 +2,10 @@ package com.creativeminds.app.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity //Asignacion tabla segun clase
 public class Empresa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //PK
+    @GeneratedValue(strategy = GenerationType.AUTO) //Autogenerado
     int id;
     @Column(nullable = false,length = 50)
     String nombre;
