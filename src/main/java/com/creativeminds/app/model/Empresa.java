@@ -21,11 +21,12 @@ public class Empresa {
     public Empresa() {
     }
 
-    public Empresa(String nombre, String direccion, String telefono, String nit) {
+    public Empresa(String nombre, String direccion, String telefono, String nit, Boolean activo) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.nit = nit;
+        this.activo = activo;
     }
 
     public int getId() {
