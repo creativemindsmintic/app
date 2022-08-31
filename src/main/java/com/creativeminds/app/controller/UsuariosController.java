@@ -23,12 +23,12 @@ public class UsuariosController {
     public Empleado guardarEmpleado(@RequestBody Empleado empl){
         return this.empleadoService.saveorUpdateEmpleado(empl);
     }
-    @GetMapping(path = "users/{id}")
+    @GetMapping(path = "users/[id]")
     public Empleado empleadoPorID(@PathVariable("id") Integer id){
         return this.empleadoService.getEmpleadoByID(id);
     }
 
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/users/[id]")
     public Empleado actualizarEmpleado(@PathVariable("id") Integer id, @RequestBody Empleado empleado){
         Empleado empl= empleadoService.getEmpleadoByID(id);
         empl.setNombre(empleado.getNombre());
@@ -40,7 +40,7 @@ public class UsuariosController {
 
     }
 
-    @DeleteMapping (path= "users/{id}") //Eliminar registro de la bd
+    @DeleteMapping (path= "users/[id]") //Eliminar registro de la bd
     public String DeleteEmpleado(@PathVariable("id") Integer id){
         boolean respuesta= this.empleadoService.deleteEmpleado(id);
         if (respuesta){  //Si respuesta es true?
