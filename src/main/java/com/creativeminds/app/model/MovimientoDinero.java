@@ -76,5 +76,3 @@ public class MovimientoDinero {
         this.monto = monto;
     }
 }
-
-

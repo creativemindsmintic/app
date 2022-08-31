@@ -3,6 +3,7 @@ package com.creativeminds.app.controller;
 
 import com.creativeminds.app.model.Empleado;
 import com.creativeminds.app.services.EmpleadoService;
+import com.creativeminds.app.services.MovimientoDineroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,44 +11,42 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class UsuariosController {
+public class MovimientoDinero {
     @Autowired
-    EmpleadoService empleadoService;
+    MovimientoDineroService movimientoDineroService ;
 
-    @GetMapping ("/users")
-    public List<Empleado> verEmpleados(){
-        return empleadoService.getAllEmpleado();
+    @GetMapping ("enterprises/[id]/movements")
+    public List<MovimientoDinero> vermovements(){
+        return MovimientoDineroService.getAllMovimientoDinero();
+    }
+    @PostMapping ("enterprises/[id]/movements")
+    public MovimientoDinero guardarMovimientoDinero (@RequestBody MovimientoDinero mov){
+        return this.movimientoDineroService.saveOrUpdateMovimientoDinero();
+    }
+    @GetMapping(path = "enterprises/[id]/movements")
+    public MovimientoDinero movimientoDineroporID (@PathVariable("id") Integer id){
+        return this.movimientoDineroService.getMovimientoDineroByID(id);
     }
 
-    @PostMapping ("/users")
-    public Empleado guardarEmpleado(@RequestBody Empleado empl){
-        return this.empleadoService.saveorUpdateEmpleado(empl);
-    }
-    @GetMapping(path = "users/{id}")
-    public Empleado empleadoPorID(@PathVariable("id") Integer id){
-        return this.empleadoService.getEmpleadoByID(id);
-    }
-
-    @PatchMapping("/users/{id}")
-    public Empleado actualizarEmpleado(@PathVariable("id") Integer id, @RequestBody Empleado empleado){
-        Empleado empl= empleadoService.getEmpleadoByID(id);
-        empl.setNombre(empleado.getNombre());
-        empl.setCedula(empleado.getCedula());
-        empl.setCorreo(empleado.getCorreo());
-        empl.setRol(empleado.getRol());
-        empl.setEmpresa(empleado.getEmpresa());
-        return empleadoService.saveorUpdateEmpleado(empl);
-
+    @PatchMapping("enterprises/[id]/movements")
+    public MovimientoDinero actualizarMovimientoDinero (@PathVariable("id") Integer id, @RequestBody MovimientoDinero movimientoDinero){
+        MovimientoDinero mov = MovimientoDineroService.getMovimientoDineroByID(id);
+        mov.setNombre(movimientoDinero.getNombre());
+        mov.setId(movimientoDinero.getId());
+        mov.setconcepto(movimientoDinero.getconcepto());
+        mov.setfecha(movimientoDinero.getfecha());
+        mov.setmonto(movimientoDinero.getmonto());
+        return movimientoDineroService.saveorUpdateMovimientoDinero(mov);
     }
 
-    @DeleteMapping (path= "users/{id}") //Eliminar registro de la bd
-    public String DeleteEmpleado(@PathVariable("id") Integer id){
-        boolean respuesta= this.empleadoService.deleteEmpleado(id);
+    @DeleteMapping (path= "enterprises/[id]/movements") //Eliminar registro de la bd
+    public String DeleteMovimientoDinero(@PathVariable("id") Integer id){
+        boolean respuesta= this.movimientoDineroService.deleteMovimientoDinero(id);
         if (respuesta){  //Si respuesta es true?
-            return "Se elimino el empleado con id" +id;
+            return "Se elimino el movimiento con id" +id;
         }
         else{
-            return "No se pudo eliminar el empleado con id"+id;
+            return "No se pudo eliminar el movimiento con id"+id;
         }
     }
 
