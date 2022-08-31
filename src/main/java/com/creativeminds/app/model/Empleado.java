@@ -16,20 +16,21 @@ public class Empleado {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     @Column(name = "rol", nullable = false, length = 20)
-    private String rol;
+    private Rol rol;
 
     @Column(name = "cedula", nullable = false, length = 20)
     private String cedula;
     public Empleado(){
 
     }
-    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula) {
+
+    public Empleado(String nombre, String correo, Empresa empresa, Rol rol, String cedula) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rol = rol;
         this.cedula = cedula;
-       }
+    }
 
     public int getId() {
         return id;
@@ -63,11 +64,11 @@ public class Empleado {
         this.empresa = empresa;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
@@ -78,6 +79,4 @@ public class Empleado {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
-
 }
