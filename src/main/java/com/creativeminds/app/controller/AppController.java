@@ -51,8 +51,11 @@ public class AppController {
 
     @GetMapping ({"/crearEmpleado"})
     public String crearEmpleado(Model model){
+        //Consultar empresas
+        List<Empresa> listaEmpresas = empresaService.getAllEmpresas();
         Empleado nuevoEmpleado = new Empleado();
         model.addAttribute("nuevoEmpleado",nuevoEmpleado);
+        model.addAttribute("ListaEmpresas",listaEmpresas);
         return "crearEmpleado";
     }
 

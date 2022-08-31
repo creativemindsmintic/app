@@ -15,25 +15,23 @@ public class Empleado {
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+    @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
-    private String rol;
+    private Rol rol;
 
     @Column(name = "cedula", nullable = false, length = 20)
     private String cedula;
 
-    @Column(name = "activo")
-    private Boolean activo;
-    public Empleado(){
+    public Empleado() {
 
     }
 
-    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula, Boolean activo) {
+    public Empleado(String nombre, String correo, Empresa empresa, Rol rol, String cedula) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rol = rol;
         this.cedula = cedula;
-        this.activo = activo;
     }
 
     public int getId() {
@@ -68,11 +66,11 @@ public class Empleado {
         this.empresa = empresa;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
@@ -82,13 +80,5 @@ public class Empleado {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
     }
 }
