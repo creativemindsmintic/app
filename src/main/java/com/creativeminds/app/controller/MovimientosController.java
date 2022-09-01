@@ -22,10 +22,10 @@ public class MovimientosController {
 
     @PostMapping ("enterprises/[id]/movements")
     public MovimientoDinero guardarMovimiento (@RequestBody MovimientoDinero mov){
-        return this.movimientoDineroService.saveOrUpdateMovimientoDinero();
+        return this.movimientoDineroService.saveorUpdateMovimentoDinero(mov);
     }
 
-    @GetMapping(path = "enterprises/[id]/movements")
+    @GetMapping("enterprises/[id]/movements")
     public MovimientoDinero movimientoDineroporID (@PathVariable("id") Integer id){
         return this.movimientoDineroService.getMovimientoDineroByID(id);
     }
@@ -33,17 +33,17 @@ public class MovimientosController {
     @PatchMapping("enterprises/[id]/movements")
     public MovimientoDinero actualizarMovimiento (@PathVariable("id") Integer id, @RequestBody MovimientoDinero movimientoDinero){
         MovimientoDinero mov = MovimientoDineroService.getMovimientoDineroByID(id);
-        mov.setNombre(movimientoDinero.getNombre());
-        mov.setId(movimientoDinero.getId());
-        mov.setconcepto(movimientoDinero.getconcepto());
-        mov.setfecha(movimientoDinero.getfecha());
-        mov.setmonto(movimientoDinero.getmonto());
-        return movimientoDineroService.saveorUpdateMovimientoDinero(mov);
+        mov.setEmpleado(movimientoDinero.getEmpleado());
+        mov.setTipo_movi(movimientoDinero.getTipo_movi());
+        mov.setConcepto(movimientoDinero.getConcepto());
+        mov.setFecha(movimientoDinero.getFecha());
+        mov.setMonto(movimientoDinero.getMonto());
+        return movimientoDineroService.saveorUpdateMovimentoDinero(mov);
     }
 
-    @DeleteMapping (path= "enterprises/[id]/movements") //Eliminar registro de la bd
+    @DeleteMapping ("enterprises/[id]/movements") //Eliminar registro de la bd
     public String DeleteMovimientoDinero(@PathVariable("id") Integer id){
-        boolean respuesta= this.movimientoDineroService.deleteMovimientoDinero(id);
+        boolean respuesta= this.movimientoDineroService.deleteMovimiento(id);
         if (respuesta){  //Si respuesta es true?
             return "Se elimino el movimiento con id" +id;
         }

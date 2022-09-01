@@ -14,7 +14,7 @@ public class MovimientoDineroService {
     @Autowired
     MovimientoDineroService movimientoDineroService;
 
-    public List<MovimientoDineros> getAllMovimientos() {
+    public List<MovimientoDinero> getAllMovimientos() {
         List<MovimientoDinero> list = new ArrayList<>();
         MovimientoRepository.findAll().forEach(movimientoDinero -> list.add(movimientoDinero));
         return list;
