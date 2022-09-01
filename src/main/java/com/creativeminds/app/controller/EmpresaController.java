@@ -3,10 +3,7 @@ package com.creativeminds.app.controller;
 import com.creativeminds.app.model.Empresa;
 import com.creativeminds.app.services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,13 @@ public class EmpresaController {
     }
 
     @PostMapping("/enterprises")
-    public Empresa crearEmpresa(Empresa nuevaEmpresa){
+    public Empresa crearEmpresa(@RequestBody Empresa nuevaEmpresa){
         return empresaService.saveorUpdateEmpresa(nuevaEmpresa);
+    }
+
+    @GetMapping("/enterprises/{id}")
+    public Empresa verEmpresaById(@PathVariable(value="id") Integer id){
+        return empresaService.getEmpresaByID(id);
     }
 
 }
