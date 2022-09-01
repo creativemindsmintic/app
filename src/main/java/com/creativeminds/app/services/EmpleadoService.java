@@ -2,11 +2,13 @@ package com.creativeminds.app.services;
 
 import com.creativeminds.app.model.Empleado;
 import com.creativeminds.app.repositories.EmpleadoRepository;
+import com.nimbusds.oauth2.sdk.GeneralException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class EmpleadoService {
@@ -20,7 +22,15 @@ public class EmpleadoService {
     }
 
     public Empleado getEmpleadoByID(Integer id) {
-        return empleadoRepository.findById(id).get();
+        try {
+            return empleadoRepository.findById(id).get();
+        }
+        catch (NoSuchElementException e){
+            Empleado emp0 = new Empleado();
+            return emp0;
+        }
+
+
     }
 
     //Metodo para guardar y actualizar
