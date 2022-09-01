@@ -23,9 +23,8 @@ public class EmpresaController {
     }
 
     @PostMapping("/enterprises")
-    public Empresa crearEmpresa(@ResponseBody Empresa nuevaEmpresa){
-        Empresa empresaCreada = empresaService.saveorUpdateEmpresa(nuevaEmpresa);
-        return empresaCreada;
+    public Empresa crearEmpresa(Empresa nuevaEmpresa){
+        return empresaService.saveorUpdateEmpresa(nuevaEmpresa);
     }
 
 }
