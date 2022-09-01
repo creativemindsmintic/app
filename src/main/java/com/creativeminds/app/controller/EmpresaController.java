@@ -29,4 +29,9 @@ public class EmpresaController {
         return empresaService.getEmpresaByID(id);
     }
 
+    @PatchMapping("/enterprises/")
+    public Empresa actualizarEmpresa(@RequestBody Empresa edisionEmpresa){
+        return empresaService.saveorUpdateEmpresa(edisionEmpresa);
+    }
+
 }
