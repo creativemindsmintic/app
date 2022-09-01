@@ -9,43 +9,41 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class EmpleadoService {
     @Autowired
     EmpleadoRepository empleadoRepository;
 
+    // lista todos los empleados
     public List<Empleado> getAllEmpleado() {
-        List<Empleado> list = new ArrayList<>();
-        empleadoRepository.findAll().forEach(empleado -> list.add(empleado));
-        return list;
+        List<Empleado> empleadoList = new ArrayList<>();
+        empleadoRepository.findAll().forEach(empleado -> empleadoList.add(empleado));
+        return empleadoList;
     }
 
-    public Empleado getEmpleadoByID(Integer id) {
-        try {
-            return empleadoRepository.findById(id).get();
-        }
-        catch (NoSuchElementException e){
-            Empleado emp0 = new Empleado();
-            return emp0;
+    // Me busca pero me permite que no solo me devuelva un empleado sino lo que encuentre
+    public Optional<Empleado> getEmpleadoByID(Integer id) {
+           return empleadoRepository.findById(id);
         }
 
-
+        public ArrayList<Empleado> obtenerPorEmpresa(Integer id){
+        return empleadoRepository.findByEmpresa(id);
     }
 
     //Metodo para guardar y actualizar
     public Empleado saveorUpdateEmpleado(Empleado empleado) {
-        Empleado empl=empleadoRepository.save(empleado);
-        return empl;
-
+        return empleadoRepository.save(empleado);
     }
 
     public boolean deleteEmpleado(Integer id) {
         empleadoRepository.deleteById(id);
-        if (getEmpleadoByID(id) != null) {
+        if(this.empleadoRepository.findById(id).isPresent()){
             return false;
         }
-        return true;
+    return true;
+
     }
 
 }
