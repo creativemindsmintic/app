@@ -15,14 +15,12 @@ public class Empleado {
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-    @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
     private Rol rol;
 
     @Column(name = "cedula", nullable = false, length = 20)
     private String cedula;
-
-    public Empleado() {
+    public Empleado(){
 
     }
 

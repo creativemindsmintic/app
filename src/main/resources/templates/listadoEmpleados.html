@@ -35,8 +35,7 @@
             <td th:text="${empleado.cedula}"></td>
             <td th:text="${empleado.correo}"></td>
             <td th:text="${empleado.rol}"></td>
-            <td th:text="${empleado.empresa.nombre}"></td>
-
+            <td th:text="${empleado.empresa}"></td>
 
             <td>
                 <a class="btn btn-warning" th:href="@{/editarEmpleado/{id}(id=${empleado.id})}">Editar</a>

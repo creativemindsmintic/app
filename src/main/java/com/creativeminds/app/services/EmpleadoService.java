@@ -24,12 +24,10 @@ public class EmpleadoService {
     }
 
     //Metodo para guardar y actualizar
-    public boolean saveorUpdateEmpleado(Empleado empleado) {
-        Empleado tmp_emp = empleadoRepository.save(empleado);
-        if (empleadoRepository.findById(tmp_emp.getId()) != null) {
-            return true;
-        }
-        return false;
+    public Empleado saveorUpdateEmpleado(Empleado empleado) {
+        Empleado empl=empleadoRepository.save(empleado);
+        return empl;
+
     }
 
     public boolean deleteEmpleado(Integer id) {
