@@ -15,22 +15,22 @@ public class MovimientosController {
     @Autowired
     MovimientoDineroService movimientoDineroService;
 
-    @GetMapping ("enterprises/[id]/movements")
+    @GetMapping ("enterprises/{id}/movements")
     public List<MovimientoDinero> verMovimientos(){
         return movimientoDineroService.getAllMovimientos();
     }
 
-    @PostMapping ("enterprises/[id]/movements")
+    @PostMapping ("enterprises/{id}/movements")
     public MovimientoDinero guardarMovimiento (@RequestBody MovimientoDinero mov){
         return this.movimientoDineroService.saveorUpdateMovimentoDinero(mov);
     }
 
-    @GetMapping("enterprises/[id]/movements")
+    @GetMapping("enterprises/{id}/movements")
     public MovimientoDinero movimientoDineroporID (@PathVariable("id") Integer id){
         return this.movimientoDineroService.getMovimientoDineroByID(id);
     }
 
-    @PatchMapping("enterprises/[id]/movements")
+    @PatchMapping("enterprises/{id}/movements")
     public MovimientoDinero actualizarMovimiento (@PathVariable("id") Integer id, @RequestBody MovimientoDinero movimientoDinero){
         MovimientoDinero mov = MovimientoDineroService.getMovimientoDineroByID(id);
         mov.setEmpleado(movimientoDinero.getEmpleado());
@@ -41,14 +41,13 @@ public class MovimientosController {
         return movimientoDineroService.saveorUpdateMovimentoDinero(mov);
     }
 
-    @DeleteMapping ("enterprises/[id]/movements") //Eliminar registro de la bd
+    @DeleteMapping ("enterprises/{id}/movements") //Eliminar registro de la bd
     public String DeleteMovimientoDinero(@PathVariable("id") Integer id){
-        boolean respuesta= this.movimientoDineroService.deleteMovimiento(id);
+        boolean respuesta=movimientoDineroService.deleteMovimiento(id);
         if (respuesta){  //Si respuesta es true?
             return "Se elimino el movimiento con id" +id;
         }
-        else{
-            return "No se pudo eliminar el movimiento con id"+id;
+        return "No se pudo eliminar el movimiento con id"+id;
         }
     }
 
