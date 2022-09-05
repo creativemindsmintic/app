@@ -20,20 +20,16 @@ public class Empleado {
 
     @Column(name = "cedula", nullable = false, length = 20)
     private String cedula;
-
-    @Column(name = "activo")
-    private Boolean activo;
     public Empleado(){
 
     }
 
-    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula, Boolean activo) {
+    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rol = rol;
         this.cedula = cedula;
-        this.activo = activo;
     }
 
     public int getId() {
@@ -82,13 +78,5 @@ public class Empleado {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
     }
 }

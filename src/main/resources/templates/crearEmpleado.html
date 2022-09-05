@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crear Empleado - Creative Minds</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container"><h1>Informacion Nuevo Empleado</h1></div>
+    <div class="container ">
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/guardarEmpleado}" th:object="${nuevoEmpleado}" method="post">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text">Nombre Empleado</span>
+                        <input type="text" th:field="*{nombre}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Cedula</span>
+                        <input type="text" th:field="*{cedula}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Correo</span>
+                        <input type="text" th:field="*{correo}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Rol</span>
+                        <input type="text" th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Empresa</span>
+                        <input type="text" th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                        <div class="col">
+                            <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atras</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" onclick="limpiar" class="btn btn-secondary">Limpiar</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col"></div>
+        </divclas>
+    </div>
+</body>
+</html>
