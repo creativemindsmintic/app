@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EmpresaController {
@@ -20,18 +21,23 @@ public class EmpresaController {
     }
 
     @PostMapping("/enterprises")
-    public Empresa crearEmpresa(@RequestBody Empresa nuevaEmpresa){
+    public Optional<Empresa> crearEmpresa(@RequestBody Empresa nuevaEmpresa){
         return empresaService.saveorUpdateEmpresa(nuevaEmpresa);
     }
 
     @GetMapping("/enterprises/{id}")
-    public Empresa verEmpresaById(@PathVariable(value="id") Integer id){
+    public Optional<Empresa> verEmpresaById(@PathVariable(value="id") Integer id){
         return empresaService.getEmpresaByID(id);
     }
 
     @PatchMapping("/enterprises/")
-    public Empresa actualizarEmpresa(@RequestBody Empresa edisionEmpresa){
+    public Optional<Empresa> actualizarEmpresa(@RequestBody Empresa edisionEmpresa){
         return empresaService.saveorUpdateEmpresa(edisionEmpresa);
+    }
+
+    @DeleteMapping("enterprises/{id}")
+    public Boolean removerEmpresa(@PathVariable(value="id") Integer id){
+        return empresaService.deleteEmpresa(id);
     }
 
 }
