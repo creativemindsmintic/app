@@ -2,6 +2,7 @@ package com.creativeminds.app.controller;
 
 
 import com.creativeminds.app.model.Empleado;
+import com.creativeminds.app.model.Empresa;
 import com.creativeminds.app.model.MovimientoDinero;
 import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.MovimientosService;
@@ -16,22 +17,24 @@ public class MovimientosController {
     @Autowired
     MovimientosService movimientosService;
 
-    @GetMapping ("movements/")
+    @GetMapping ("/movements")
     public List<MovimientoDinero> verMovimientos(){
-        return movimientosService.getAllMovimientos();
+        List<MovimientoDinero> list = new ArrayList<>();
+        movimientosService.getAllMovimientos().forEach(movimiento -> list.add(movimiento));
+        return list;
     }
 
-    @PostMapping ("movements/")
+    @PostMapping ("/movements")
     public MovimientoDinero guardarMovimiento (@RequestBody MovimientoDinero mov){
         return movimientosService.saveOrUpdateMovimiento(mov);
     }
 
-    @GetMapping("movements/{id}")
+    @GetMapping("/movements/{id}")
     public MovimientoDinero movimientoDineroporID (@PathVariable("id") Integer id){
         return movimientosService.getMovimientoById(id);
     }
 
-    @PatchMapping("movements/{id}")
+    @PatchMapping("/movements/{id}")
     public MovimientoDinero actualizarMovimiento (@PathVariable("id") Integer id, @RequestBody MovimientoDinero movimientoDinero){
         MovimientoDinero mov = movimientosService.getMovimientoById(id);
         mov.setEmpleado(movimientoDinero.getEmpleado());
@@ -42,7 +45,7 @@ public class MovimientosController {
         return movimientosService.saveOrUpdateMovimiento(mov);
     }
 
-    @DeleteMapping ("movements/{id}") //Eliminar registro de la bd
+    @DeleteMapping ("/movements/{id}") //Eliminar registro de la bd
     public String DeleteMovimientoDinero(@PathVariable("id") Integer id){
         boolean respuesta=movimientosService.deleteMovimiento(id);
         if (respuesta){  //Si respuesta es true?
