@@ -10,8 +10,7 @@ import java.util.List;
 
 @Service
 public class MovimientosService {
-    @Autowired
-    MovimientosService movimientosService;
+
     @Autowired
     MovimientoRepository movimientoRepository;
 
