@@ -17,17 +17,17 @@ public class MovimientosController {
 
     @GetMapping ("enterprises/{id}/movements")
     public List<MovimientoDinero> verMovimientos(){
-        return movimientoDineroService.getAllMovimientos();
+         return movimientoDineroService.getAllMovimientos();
     }
 
     @PostMapping ("enterprises/{id}/movements")
     public MovimientoDinero guardarMovimiento (@RequestBody MovimientoDinero mov){
-        return this.movimientoDineroService.saveorUpdateMovimentoDinero(mov);
+        return movimientoDineroService.saveorUpdateMovimentoDinero(mov);
     }
 
     @GetMapping("enterprises/{id}/movements")
     public MovimientoDinero movimientoDineroporID (@PathVariable("id") Integer id){
-        return this.movimientoDineroService.getMovimientoDineroByID(id);
+        return movimientoDineroService.getMovimientoDineroByID(id);
     }
 
     @PatchMapping("enterprises/{id}/movements")
@@ -50,7 +50,10 @@ public class MovimientosController {
         return "No se pudo eliminar el movimiento con id"+id;
         }
     }
-
+    @GettMapping ("enterprises/{id}/movements")
+    public ArrayList <MovimientoDinero> movimientosPorEmpleado (@PathVariable ("id") Integer id) {
+    return movimientoDineroService.obtenerEmpleado(id);
+    }
 
 
 }

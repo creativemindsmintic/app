@@ -6,18 +6,19 @@ import com.creativeminds.app.repositories.MovimientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MovimientoDineroService {
     @Autowired
-    MovimientoDineroService movimientoDineroService;
+    MovimientoRepository movimientoRepository;
 
     public List<MovimientoDinero> getAllMovimientos() {
-        List<MovimientoDinero> list = new ArrayList<>();
-        MovimientoRepository.findAll().forEach(movimientoDinero -> list.add(movimientoDinero));
-        return list;
+        List<MovimientoDinero> movimientoDineroList = new ArrayList<>();
+        MovimientoRepository.findAll().forEach(movimientoDinero-> movimientoDineroList.add(movimientoDinero));
+        return movimientoDineroList;
     }
 
     public MovimientoDinero getMovimientoDineroByID (Integer id) {
@@ -33,10 +34,16 @@ public class MovimientoDineroService {
 
     public boolean deleteMovimiento(Integer id) {
         MovimientoRepository.deleteById(id);
-        if (getMovimientoDineroByID(id) != null) {
+        if (this.movimientoRepository.findById(id).isPresent()) {
             return false;
         }
         return true;
     }
+    public ArrayList<MovimientoDinero>obtenerEmpleado (Integer id){
+        return .movimientoRepository.findByEmpleado();
+    }
 
+    public ArrayList<MovimientoDinero>obtenerEmpresa (Integer id){
+        return movimientoRepository.findByEmpresa();
+    }
 }
