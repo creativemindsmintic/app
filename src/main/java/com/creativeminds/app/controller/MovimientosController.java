@@ -16,12 +16,12 @@ public class MovimientosController {
     @Autowired
     MovimientosService movimientosService;
 
-    @GetMapping ("movements/{id}")
+    @GetMapping ("movements/")
     public List<MovimientoDinero> verMovimientos(){
         return movimientosService.getAllMovimientos();
     }
 
-    @PostMapping ("movements/{id}")
+    @PostMapping ("movements/")
     public MovimientoDinero guardarMovimiento (@RequestBody MovimientoDinero mov){
         return movimientosService.saveOrUpdateMovimiento(mov);
     }
