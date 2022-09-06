@@ -8,6 +8,7 @@ import com.creativeminds.app.services.MovimientosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -50,5 +51,15 @@ public class MovimientosController {
         return "No se pudo eliminar el movimiento con id"+id;
         }
     }
+
+        @GetMapping("/users/{id}/movements") //Consultar movimientos por id del empleado
+        public ArrayList<MovimientoDinero> movimientosPorEmpleado(@PathVariable("id") Integer id){
+                return movimientosService.obtenerPorEmpleado(id);
+        }
+
+        @GetMapping("/enterprises/{id}/movements") //Consultar movimientos que pertenecen a una empresa por el id de la empresa
+        public ArrayList<MovimientoDinero> movimientosPorEmpresa(@PathVariable("id") Integer id){
+                return movimientosService.obtenerPorEmpresa(id);
+        }
 
 }
