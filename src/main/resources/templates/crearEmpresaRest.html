@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Listado Empresas"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Listado Empresa</title>
+</head>
+<body>
+<div id="Empresas">
+</div>
+<script>
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("Empresas").innerHTML =
+      this.responseText;
+    }
+    xhttp.open("GET", "/enterprises");
+    xhttp.send();
+</script>
+</body>
+</html>
