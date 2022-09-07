@@ -30,7 +30,7 @@ public class EmpresaController {
         return empresaService.getEmpresaByID(id);
     }
 
-    @PatchMapping("/enterprises/")
+    @PatchMapping("/enterprises/{id}")
     public Optional<Empresa> actualizarEmpresa(@RequestBody Empresa edisionEmpresa){
         return empresaService.saveorUpdateEmpresa(edisionEmpresa);
     }
