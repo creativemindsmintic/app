@@ -1,9 +1,12 @@
 package com.creativeminds.app.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity //Asignacion tabla segun clase
 public class Empresa {
+    @OneToMany(mappedBy = "empresa")
+    private Set<Empleado> empleado;
     @Id //PK
     @GeneratedValue(strategy = GenerationType.AUTO) //Autogenerado
     int id;

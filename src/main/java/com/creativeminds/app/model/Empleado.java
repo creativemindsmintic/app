@@ -1,10 +1,13 @@
 package com.creativeminds.app.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="empleado")
 public class Empleado {
+    @OneToMany(mappedBy = "empleado")
+    private Set<MovimientoDinero> movimientoDinero;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

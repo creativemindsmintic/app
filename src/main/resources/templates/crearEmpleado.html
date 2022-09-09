@@ -26,11 +26,18 @@
                     </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text" >Rol</span>
-                        <input type="text" th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+<!--                        <input type="text" th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">-->
+                            <select th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                <option value="Admin">Administrador</option>
+                                <option value="Operario">Operario</option>
+                            </select>
                     </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text" >Empresa</span>
-                        <input type="text" th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+<!--                        <input type="text" th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">-->
+                            <select th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                <option th:each="empresa : ${ListaEmpresas}" th:value="${empresa.id}" th:text="${empresa.nombre}">  </option>
+                            </select>
                     </div>
                     <br>
                     <div class="row">
@@ -48,7 +55,7 @@
                 </form>
             </div>
             <div class="col"></div>
-        </divclas>
+        </div>
     </div>
 </body>
 </html>
