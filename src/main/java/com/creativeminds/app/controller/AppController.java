@@ -15,6 +15,11 @@ import java.util.List;
 
 @Controller
 public class AppController {
+
+    @GetMapping("/index")
+    public String index(){
+        return "index.html";
+    }
     @Autowired
     EmpresaService empresaService;
 
