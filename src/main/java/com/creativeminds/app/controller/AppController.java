@@ -18,7 +18,7 @@ public class AppController {
 
     @GetMapping("/")
     public String index(){
-        return "index.html";
+        return "index";
     }
     @Autowired
     EmpresaService empresaService;
