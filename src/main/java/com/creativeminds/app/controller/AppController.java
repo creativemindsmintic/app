@@ -20,7 +20,13 @@ public class AppController {
     public String index(){
         return "index";
     }
-    @Autowired
+
+    @GetMapping("/inicio")
+    public String Inicio(){
+        return "Inicio";
+    }
+
+     @Autowired
     EmpresaService empresaService;
 
     @GetMapping ({"/verEmpresas"})

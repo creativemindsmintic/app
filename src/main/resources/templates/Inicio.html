@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio de sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<main>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold mb-4">App de ingresos y gastos</h1>
+        <div class="d-flex gap-4 justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="img/gastos.png" class="card-img-top" alt="Ingresos_y_Gastos">
+                <div class="card-body">
+                    <h5 class="card-title">Sistema de gestión de ingresos y gastos</h5>
+                    <p class="card-text">Ingresa al modulo de control de ingresos y gastos.</p>
+                    <a href="#" class="btn btn-primary">Ingresar</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="img/user.png" class="card-img-top" alt="Usuarios">
+                <div class="card-body">
+                    <h5 class="card-title">Sistema de gestión de Usuarios</h5>
+                    <p class="card-text">Ingresa al modulo de Usuarios.</p>
+                    <a th:href="@{/verEmpleados}" class="btn btn-primary">Ingresar</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="img/Empresa.png" class="card-img-top" alt="Empresas">
+                <div class="card-body">
+                    <h5 class="card-title">Sistema de gestión de empresas</h5>
+                    <p class="card-text">Ingresa al modulo de control de Empresas.</p>
+                    <a href="#" class="btn btn-primary">Ingresar</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
+
