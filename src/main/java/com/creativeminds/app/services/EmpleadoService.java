@@ -20,6 +20,7 @@ public class EmpleadoService {
     }
 
     public Empleado getEmpleadoByID(Integer id) {
+
         return empleadoRepository.findById(id).get();
     }
 

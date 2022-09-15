@@ -2,8 +2,10 @@ package com.creativeminds.app.controller;
 
 import com.creativeminds.app.model.Empleado;
 import com.creativeminds.app.model.Empresa;
+import com.creativeminds.app.model.MovimientoDinero;
 import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.EmpresaService;
+import com.creativeminds.app.services.MovimientosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,64 +19,86 @@ import java.util.List;
 public class AppController {
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
     @GetMapping("/inicio")
-    public String Inicio(){
+    public String Inicio() {
         return "Inicio";
     }
 
-     @Autowired
+    @Autowired
     EmpresaService empresaService;
 
-    @GetMapping ({"/verEmpresas"})
-    public String verEmpresas(Model model){
+    @GetMapping({"/verEmpresas"})
+    public String verEmpresas(Model model) {
         List<Empresa> listaEmpresas = empresaService.getAllEmpresas();
-        model.addAttribute("listadoEmpresas",listaEmpresas);
+        model.addAttribute("listadoEmpresas", listaEmpresas);
         return "listadoEmpresas";
     }
 
-    @GetMapping ({"/crearEmpresa"})
-    public String crearEmpresa(Model model){
+    @GetMapping({"/crearEmpresa"})
+    public String crearEmpresa(Model model) {
         Empresa nuevaEmpresa = new Empresa();
-        model.addAttribute("nuevaEmpresa",nuevaEmpresa);
+        model.addAttribute("nuevaEmpresa", nuevaEmpresa);
         return "crearEmpresa";
     }
 
-    @PostMapping ({"/guardarEmpresa"})
-    public String guardarEmpresa(Empresa nuevaEmpresa, RedirectAttributes redirectAttributes){
-        if(empresaService.saveorUpdateEmpresa(nuevaEmpresa) == true){
+    @PostMapping({"/guardarEmpresa"})
+    public String guardarEmpresa(Empresa nuevaEmpresa, RedirectAttributes redirectAttributes) {
+        if (empresaService.saveorUpdateEmpresa(nuevaEmpresa) == true) {
             return "redirect:/verEmpresas";
         }
         return "redirect:/crearEmpresa";
     }
+
     @Autowired
     EmpleadoService empleadoService;
 
-    @GetMapping ({"/verEmpleados"})
-    public String verEmpleado(Model model){
+    @GetMapping({"/verEmpleados"})
+    public String verEmpleado(Model model) {
         List<Empleado> listaEmpleados = empleadoService.getAllEmpleado();
-        model.addAttribute("listadoEmpleados",listaEmpleados);
+        model.addAttribute("listadoEmpleados", listaEmpleados);
         return "listadoEmpleados";
     }
 
-    @GetMapping ({"/crearEmpleado"})
-    public String crearEmpleado(Model model){
+    @GetMapping({"/crearEmpleado"})
+    public String crearEmpleado(Model model) {
         //Consultar empresas
         List<Empresa> listaEmpresas = empresaService.getAllEmpresas();
         Empleado nuevoEmpleado = new Empleado();
-        model.addAttribute("nuevoEmpleado",nuevoEmpleado);
-        model.addAttribute("ListaEmpresas",listaEmpresas);
+        model.addAttribute("nuevoEmpleado", nuevoEmpleado);
+        model.addAttribute("ListaEmpresas", listaEmpresas);
         return "crearEmpleado";
     }
 
-    @PostMapping ({"/guardarEmpleado"})
-    public String guardarEmpleado(Empleado nuevoEmpleado, RedirectAttributes redirectAttributes){
-        if(empleadoService.saveorUpdateEmpleado(nuevoEmpleado) == true){
+    @PostMapping({"/guardarEmpleado"})
+    public String guardarEmpleado(Empleado nuevoEmpleado, RedirectAttributes redirectAttributes) {
+        if (empleadoService.saveorUpdateEmpleado(nuevoEmpleado) == true) {
             return "redirect:/verEmpleados";
         }
         return "redirect:/crearEmpleado";
     }
+
+
+
+    @Autowired
+    MovimientosService movimientosService;
+
+    @GetMapping({"/verMovimientos"})
+    public String verMovimientos(Model model) {
+        List<MovimientoDinero> ListadoMovimientos = movimientosService.getAllMovimientos();
+        model.addAttribute("listadoMovimientos", ListadoMovimientos);
+        return "listadoMovimientos";
+    }
+    @GetMapping({"/crearMovimiento"})
+    public String crearMovimiento(Model model) {
+        List<Empleado> listaEmpleado = empleadoService.getAllEmpleado();
+        MovimientoDinero nuevoMovimiento = new MovimientoDinero();
+        model.addAttribute("nuevoMovimiento", nuevoMovimiento);
+        model.addAttribute("ListaEmpleado", listaEmpleado);
+        return "crearMovimiento";
+    }
+    
 }
