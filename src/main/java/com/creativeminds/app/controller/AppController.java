@@ -82,7 +82,6 @@ public class AppController {
     }
 
 
-
     @Autowired
     MovimientosService movimientosService;
 
@@ -92,6 +91,7 @@ public class AppController {
         model.addAttribute("listadoMovimientos", ListadoMovimientos);
         return "listadoMovimientos";
     }
+
     @GetMapping({"/crearMovimiento"})
     public String crearMovimiento(Model model) {
         List<Empleado> listaEmpleado = empleadoService.getAllEmpleado();
@@ -100,5 +100,12 @@ public class AppController {
         model.addAttribute("ListaEmpleado", listaEmpleado);
         return "crearMovimiento";
     }
-    
+
+    @PostMapping({"/guardarMovimiento"})
+    public String guardarMovimiento(Movimiento nuevoMovimiento, RedirectAttributes redirectAttributes) {
+        if (movimientoService.saveorUpdateMovimiento(nuevoMovimiento) == true) {
+            return "redirect:/verMovimientos";
+        }
+        return "redirect:/guardarMovimiento";
+    }
 }
