@@ -9,8 +9,7 @@ import com.creativeminds.app.services.MovimientosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -18,9 +17,13 @@ import java.util.List;
 @Controller
 public class AppController {
 
+    //    @GetMapping("/")
+//    public String index() {
+//        return "index";
+//    }
     @GetMapping("/")
-    public String index() {
-        return "index";
+    public String plantilla() {
+        return "Plantilla";
     }
 
     @GetMapping("/inicio")
@@ -53,6 +56,24 @@ public class AppController {
         return "redirect:/crearEmpresa";
     }
 
+    @GetMapping("/editarEmpresa/{id}")
+    public String editarEmpresa(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
+        //Buscar la empresa a editar
+        Empresa empEditar = empresaService.getEmpresaByID(id);
+        model.addAttribute("empresaEditada",empEditar);
+
+        return "editarEmpresa";
+    }
+//    @GetMapping("/EliminarEmpresa/{id}")
+//    public String eliminarEmpresa(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+//        if (empresaService.deleteEmpresa(id)==true){
+//            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
+//            return "redirect:/VerEmpresas";
+//        }
+//        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+//        return "redirect:/VerEmpresas";
+//    }
+
     @Autowired
     EmpleadoService empleadoService;
 
@@ -81,8 +102,6 @@ public class AppController {
         return "redirect:/crearEmpleado";
     }
 
-
-
     @Autowired
     MovimientosService movimientosService;
 
@@ -92,6 +111,7 @@ public class AppController {
         model.addAttribute("listadoMovimientos", ListadoMovimientos);
         return "listadoMovimientos";
     }
+
     @GetMapping({"/crearMovimiento"})
     public String crearMovimiento(Model model) {
         List<Empleado> listaEmpleado = empleadoService.getAllEmpleado();
@@ -107,5 +127,15 @@ public class AppController {
             return "redirect:/verMovimientos";
         }
         return "redirect:/crearMovimiento";
+    }
+
+    @PatchMapping({"/EditarMovimiento/id"})
+    public String editarMovimento(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje) {
+        MovimientoDinero mov = movimientosService.getMovimientoById(id);
+        model.addAttribute("mov", mov);
+        model.addAttribute("mensaje", mensaje);
+        List<Empleado> listaEmpleados = empleadoService.getAllEmpleado();
+        model.addAttribute("emplelist", listaEmpleados);
+        return "crearMovimiento";
     }
 }
