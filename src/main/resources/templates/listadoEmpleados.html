@@ -38,7 +38,11 @@
 
             <td>
                 <a class="btn btn-warning" th:href="@{/editarEmpleado/{id}(id=${empleado.id})}">Editar</a>
-                <a class="btn btn-danger" th:href="@{/eliminarEmpleado/{id}(id=${empleado.id})}">Eliminar</a>
+                <a th:data-confirm-delete="|Estás seguro de eliminar este Empleado?|"
+                   class="btn btn-danger"
+                   th:href="@{/eliminarEmpleado/{id}(id=${empleado.id})}"
+                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                        >Eliminar</a>
             </td>
         </tr>
     </table>

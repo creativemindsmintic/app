@@ -113,7 +113,7 @@ public class AppController {
 
     @GetMapping("/eliminarEmpleado/{id}")
     public String eliminarEmpleado(@PathVariable Integer id, RedirectAttributes redirectAttributes){
-        if (empleadoService.deleteEmpleado(id)==true){
+        if (empleadoService.deleteEmpleado(id)){
             redirectAttributes.addFlashAttribute("mensaje","deleteOK");
             return "redirect:/VerEmpleados";
         }
