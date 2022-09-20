@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Inicio</title>
@@ -12,7 +12,12 @@
         <h1 class="display-5 fw-bold">Gestión de ingresos y gastos</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">App Web empresa de manufactura para registrar ingresos y egresos.</p>
-            <a th:href="@{/inicio}" class="btn btn-primary btn-lg px-4 gap-3">Llévame a la aplicación</a>
+            <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/oauth2/authorization/auth0}" class="btn btn-primary btn-lg px-4 gap-3">Inicia Sesión</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a th:href="@{/inicio}" class="btn btn-primary btn-lg px-4 gap-3">Llévame a la aplicación</a>
+            </div>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">Saber más</button>
         </div>
     </div>
