@@ -3,6 +3,7 @@ package com.creativeminds.app.controller;
 import com.creativeminds.app.model.Empleado;
 import com.creativeminds.app.model.Empresa;
 import com.creativeminds.app.model.MovimientoDinero;
+import com.creativeminds.app.model.TipoMov;
 import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.EmpresaService;
 import com.creativeminds.app.services.MovimientosService;
@@ -126,6 +127,17 @@ public class AppController {
     @GetMapping({"/verMovimientos"})
     public String verMovimientos(Model model) {
         List<MovimientoDinero> ListadoMovimientos = movimientosService.getAllMovimientos();
+        Double total = 0.0;
+        for (MovimientoDinero movim : ListadoMovimientos) {
+            if(movim.getTipo_movi()== TipoMov.Ingreso){
+                total = total + movim.getMonto();
+            }
+            if(movim.getTipo_movi()== TipoMov.Egreso){
+                total = total - movim.getMonto();
+            }
+
+        }
+        model.addAttribute("totalMovimientos", total);
         model.addAttribute("listadoMovimientos", ListadoMovimientos);
         return "listadoMovimientos";
     }
@@ -147,13 +159,23 @@ public class AppController {
         return "redirect:/crearMovimiento";
     }
 
-    @PatchMapping({"/EditarMovimiento/id"})
+    @GetMapping({"/editarMovimiento/{id}"})
     public String editarMovimento(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje) {
         MovimientoDinero mov = movimientosService.getMovimientoById(id);
         model.addAttribute("mov", mov);
         model.addAttribute("mensaje", mensaje);
         List<Empleado> listaEmpleados = empleadoService.getAllEmpleado();
         model.addAttribute("emplelist", listaEmpleados);
-        return "crearMovimiento";
+        return "editarMovimiento";
     }
+    @GetMapping("/eliminarMovimiento/{id}")
+    public String eliminarMovimiento(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        if (movimientosService.deleteMovimiento(id)){
+            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
+            return "redirect:/verMovimientos";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/verMovimientos";
+    }
+
 }

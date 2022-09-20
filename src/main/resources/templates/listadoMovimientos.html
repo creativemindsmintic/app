@@ -33,13 +33,28 @@
             <td th:text="${movimientoDinero.fecha}"></td>
             <td th:text="${movimientoDinero.concepto}"></td>
             <td th:text="${movimientoDinero.tipo_movi}"></td>
-            <td th:text="${movimientoDinero.monto}"></td>
+            <td th:text="${#numbers.formatDecimal(movimientoDinero.monto,3,'POINT',2,'COMMA')}"></td>
 
 
             <td>
                 <a class="btn btn-warning" th:href="@{/editarMovimiento/{id}(id=${movimientoDinero.id})}">Editar</a>
-                <a class="btn btn-danger" th:href="@{/eliminarMovimiento/{id}(id=${movimientoDinero.id})}">Eliminar</a>
+                <a
+                        th:data-confirm-delete="|Estás seguro de eliminar este Movimiento?|"
+                        class="btn btn-danger"
+                        th:href="@{/eliminarMovimiento/{id}(id=${movimientoDinero.id})}"
+                        onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                        >Eliminar</a>
             </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td th:text="${#numbers.formatDecimal(totalMovimientos,3,'POINT',2,'COMMA')}"></td>
+            <td></td>
+
+
         </tr>
     </table>
 </div>

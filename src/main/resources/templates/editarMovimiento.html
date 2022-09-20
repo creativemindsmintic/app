@@ -8,11 +8,15 @@
 </head>
 <body>
 <main>
-    <div class="container px-2 py-3 my-3"><h1>Información Nuevo Movimiento</h1></div>
+    <div class="container px-2 py-3 my-3"><h1>Información Movimiento</h1></div>
     <div class="container ">
         <div class="row">
             <div class="col">
-                <form th:action="@{/guardarMovimiento}" th:object="${nuevoMovimiento}" method="post">
+                <form th:action="@{/guardarMovimiento}" th:object="${mov}" method="post">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Id</span>
+                        <input readonly type="text" th:field="*{id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text" >Fecha</span>
                         <input type="date"  th:field="*{fecha}" class="form-control" >
@@ -23,14 +27,18 @@
                     </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text" >Tipo de Movimiento</span>
-                            <select th:field="*{tipo_movi}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                                <option value="Ingreso">Ingreso</option>
-                                <option value="Egreso">Egreso</option>
-                            </select>
+                        <select th:field="*{tipo_movi}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            <option value="positivo">Ingreso</option>
+                            <option value="negativo">Gasto</option>
+                        </select>
                     </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text">Monto</span>
-                        <input type="number" th:field="*{monto}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                        <input type="text" th:field="*{monto}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text">Empleado</span>
+                        <input readonly type="text" th:field="*{empleado.id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
                     </div>
                     <br>
                     <div class="row">
