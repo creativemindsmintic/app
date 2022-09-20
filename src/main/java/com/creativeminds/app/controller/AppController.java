@@ -101,6 +101,24 @@ public class AppController {
         }
         return "redirect:/crearEmpleado";
     }
+    @GetMapping("/editarEmpleado/{id}")
+    public String editarEmpleado(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
+        //Buscar empleado a editar
+        Empleado empleadoEditar = empleadoService.getEmpleadoByID(id);
+        model.addAttribute("empleadoEditado",empleadoEditar);
+
+        return "editarEmpleado";
+    }
+
+    @GetMapping("/eliminarEmpleado/{id}")
+    public String eliminarEmpleado(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        if (empleadoService.deleteEmpleado(id)==true){
+            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
+            return "redirect:/VerEmpleados";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/VerEmpleados";
+    }
 
     @Autowired
     MovimientosService movimientosService;
