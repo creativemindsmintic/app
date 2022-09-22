@@ -31,7 +31,9 @@ public class AppController {
     public String index(Model model, @AuthenticationPrincipal OidcUser principal) {
             if(principal!=null){
                 User user = this.userService.gerOrCreateuser(principal.getClaims());
+                model.addAttribute("user",user);
             }
+
             return "index";
     }
 //    @GetMapping("/")
