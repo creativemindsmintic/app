@@ -1,12 +1,10 @@
 package com.creativeminds.app.controller;
 
-import com.creativeminds.app.model.Empleado;
-import com.creativeminds.app.model.Empresa;
-import com.creativeminds.app.model.MovimientoDinero;
-import com.creativeminds.app.model.TipoMov;
+import com.creativeminds.app.model.*;
 import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.EmpresaService;
 import com.creativeminds.app.services.MovimientosService;
+import com.creativeminds.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -20,9 +18,21 @@ import java.util.List;
 @Controller
 public class AppController {
 
-        @GetMapping("/")
+    UserService userService;
+
+    public AppController(EmpresaService empresaService, EmpleadoService empleadoService, MovimientosService movimientosService, UserService userService) {
+        this.empresaService = empresaService;
+        this.empleadoService = empleadoService;
+        this.movimientosService = movimientosService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/")
     public String index(Model model, @AuthenticationPrincipal OidcUser principal) {
-        return "index";
+            if(principal!=null){
+                User user = this.userService.gerOrCreateuser(principal.getClaims());
+            }
+            return "index";
     }
 //    @GetMapping("/")
 //    public String plantilla() {
