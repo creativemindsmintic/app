@@ -20,6 +20,7 @@ public class EmpleadoService {
     }
 
     public Empleado getEmpleadoByID(Integer id) {
+
         return empleadoRepository.findById(id).get();
     }
 
@@ -30,12 +31,11 @@ public class EmpleadoService {
 
     }
 
-    public boolean deleteEmpleado(Integer id) {
-        empleadoRepository.deleteById(id);
-        if (getEmpleadoByID(id) != null) {
+    public boolean deleteEmpleado(Integer id){ //Eliminar Empleado por id
+        empleadoRepository.deleteById(id); //Eliminar usando el metodo que nos ofrece el repositorio
+        if(this.empleadoRepository.findById(id).isPresent()){ //Si al buscar el empleado lo encontramos, no se eliminó (false)
             return false;
         }
-        return true;
+        return true; //Si al buscar el empleado no lo encontramos, si lo eliminò (true)
     }
-
 }

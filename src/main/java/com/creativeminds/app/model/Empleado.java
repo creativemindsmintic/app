@@ -10,26 +10,25 @@ public class Empleado {
     private int id;
     @Column(name = "nombre", nullable = false, length = 80)
     private String nombre;
-    @Column(name = "correo", nullable = false, length = 50)
+    @Column(name = "correo", nullable = false, length = 50, unique = true)
     private String correo;
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+    @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
     private Rol rol;
 
-    @Column(name = "cedula", nullable = false, length = 20)
-    private String cedula;
-    public Empleado(){
+    public Empleado() {
 
     }
 
-    public Empleado(String nombre, String correo, Empresa empresa, Rol rol, String cedula) {
+    public Empleado(String nombre, String correo, Empresa empresa, Rol rol) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rol = rol;
-        this.cedula = cedula;
+
     }
 
     public int getId() {
@@ -72,11 +71,5 @@ public class Empleado {
         this.rol = rol;
     }
 
-    public String getCedula() {
-        return cedula;
-    }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
 }

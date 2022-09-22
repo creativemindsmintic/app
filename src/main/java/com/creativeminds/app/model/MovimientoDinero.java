@@ -11,7 +11,7 @@ public class MovimientoDinero {
     @ManyToOne
     @JoinColumn(name = "empleado_id")
     Empleado empleado;
-    String tipo_movi;
+    TipoMov tipo_movi;
     String concepto;
     Date fecha;
     Double monto;
@@ -19,7 +19,7 @@ public class MovimientoDinero {
     public MovimientoDinero() {
     }
 
-    public MovimientoDinero(int id, Empleado empleado, String tipo_movi, String concepto, Date fecha, Double monto) {
+    public MovimientoDinero(int id, Empleado empleado, TipoMov tipo_movi, String concepto, Date fecha, Double monto) {
         this.id = id;
         this.empleado = empleado;
         this.tipo_movi = tipo_movi;
@@ -44,11 +44,11 @@ public class MovimientoDinero {
         this.empleado = empleado;
     }
 
-    public String getTipo_movi() {
+    public TipoMov getTipo_movi() {
         return tipo_movi;
     }
 
-    public void setTipo_movi(String tipo_movi) {
+    public void setTipo_movi(TipoMov tipo_movi) {
         this.tipo_movi = tipo_movi;
     }
 
@@ -76,5 +76,3 @@ public class MovimientoDinero {
         this.monto = monto;
     }
 }
-
-
