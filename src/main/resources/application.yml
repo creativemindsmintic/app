@@ -14,4 +14,6 @@ spring:
         provider:
           auth0:
             # trailing slash is important!
-            issuer-uri: https://dev-svsr5jm4.us.auth0.com
+            issuer-uri: https://dev-svsr5jm4.us.auth0.com/
+
+
