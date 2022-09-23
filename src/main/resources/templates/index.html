@@ -17,7 +17,7 @@
             </div>
             <div sec:authorize="isAuthenticated()">
                 <h3 th:text="'Bienvenido, ' + ${user.getEmail()}"></h3>
-                <a th:href="@{/plantilla}" class="btn btn-primary btn-lg px-4 gap-3">Llévame a la aplicación</a>
+                <a th:href="@{/inicio}" class="btn btn-primary btn-lg px-4 gap-3">Llévame a la aplicación</a>
             </div>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">Saber más</button>
         </div>
