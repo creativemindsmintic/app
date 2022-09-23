@@ -13,7 +13,7 @@ public class Empleado {
     @Column(name = "correo", nullable = false, length = 50, unique = true)
     private String correo;
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
     @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
