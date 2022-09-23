@@ -125,10 +125,10 @@ public class AppController {
     public String eliminarEmpleado(@PathVariable Integer id, RedirectAttributes redirectAttributes){
         if (empleadoService.deleteEmpleado(id)){
             redirectAttributes.addFlashAttribute("mensaje","deleteOK");
-            return "redirect:/VerEmpleados";
+            return "redirect:/verEmpleados";
         }
         redirectAttributes.addFlashAttribute("mensaje", "deleteError");
-        return "redirect:/VerEmpleados";
+        return "redirect:/verEmpleados";
     }
 
     @Autowired
