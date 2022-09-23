@@ -19,13 +19,7 @@ public class UserService {
     public User findUserByEmail(String email){
         return this.userRepository.findByEmail(email);
     }
-    public User findUserByAuth0Id(String auth0Id){
-        return this.userRepository.findByAuth0Id(auth0Id);
-    }
 
-    public User findUserByImage(String image){
-        return this.userRepository.findByImage(image);
-    }
     public User gerOrCreateuser(Map<String, Object> userData){
         String email = (String) userData.get("email");
         User user =findUserByEmail(email);
