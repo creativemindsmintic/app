@@ -43,7 +43,7 @@ public class AppController {
 
     @GetMapping("/inicio")
     public String Inicio() {
-        return "Inicio";
+        return "Plantilla";
     }
 
     @Autowired
