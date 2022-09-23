@@ -1,53 +1,94 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Listado Empleados - Creative Minds</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-<div class="container px-2 py-3 my-3">
-    <table width="100%">
-        <tr>
-            <td>
-                <h1>Listado Empleados</h1>
-            </td>
-            <td style="text-align: right">
-                <a class="btn btn-success" th:href="@{/crearEmpleado}">Crear Empleado</a>
-            </td>
-        </tr>
-    </table>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-blue">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a th:href="@{/inicio}" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <img src="img/gastar.png" height="80">
+                    <span class="fs-5 d-none d-sm-inline">INICIO</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li>
+                        <a th: href="@{/verEmpresas}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Gestión Empresas</span></a>
+                    </li>
+                    <li>
+                        <a th: href="@{/verEmpleados}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Gestión de Empleados</span> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th: href="@{/verMovimientos}" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Gestión Ingresos y Egresos</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">loser</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container px-2 py-3 my-3">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <h1>Listado Empleados</h1>
+                    </td>
+                    <td style="text-align: right">
+                        <a class="btn btn-success" th:href="@{/crearEmpleado}">Crear Empleado</a>
+                    </td>
+                </tr>
+            </table>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th>Empresa</th>
-            <th></th>
-        </tr>
-        <tr th:each="empleado : ${listadoEmpleados}">
-            <td th:text="${empleado.id}"></td>
-            <td th:text="${empleado.nombre}"></td>
-            <td th:text="${empleado.correo}"></td>
-            <td th:text="${empleado.rol}"></td>
-            <td th:text="${empleado.empresa}"></td>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Empresa</th>
+                    <th></th>
+                </tr>
+                <tr th:each="empleado : ${listadoEmpleados}">
+                    <td th:text="${empleado.id}"></td>
+                    <td th:text="${empleado.nombre}"></td>
+                    <td th:text="${empleado.correo}"></td>
+                    <td th:text="${empleado.rol}"></td>
+                    <td th:text="${empleado.empresa}"></td>
 
 
-            <td>
-                <a class="btn btn-warning" th:href="@{/editarEmpleado/{id}(id=${empleado.id})}">Editar</a>
-                <a th:data-confirm-delete="|Estás seguro de eliminar este Empleado?|"
-                   class="btn btn-danger"
-                   th:href="@{/eliminarEmpleado/{id}(id=${empleado.id})}"
-                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/editarEmpleado/{id}(id=${empleado.id})}">Editar</a>
+                        <a th:data-confirm-delete="|Estás seguro de eliminar este Empleado?|"
+                           class="btn btn-danger"
+                           th:href="@{/eliminarEmpleado/{id}(id=${empleado.id})}"
+                           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
                         >Eliminar</a>
-            </td>
-        </tr>
-    </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>
