@@ -40,10 +40,10 @@ public class AppController {
         return "plantilla";
     }
 
-//    @GetMapping("/inicio")
-//    public String Inicio() {
-//        return "inicio";
-//    }
+    @GetMapping("/inicio")
+    public String Inicio() {
+        return "inicio";
+    }
 
     @Autowired
     EmpresaService empresaService;
