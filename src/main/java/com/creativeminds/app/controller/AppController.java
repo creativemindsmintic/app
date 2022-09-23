@@ -36,15 +36,15 @@ public class AppController {
 
             return "index";
     }
-//    @GetMapping("/")
-//    public String plantilla() {
-//        return "Plantilla";
-//    }
-
-    @GetMapping("/inicio")
-    public String Inicio() {
+    @GetMapping("/plantilla")
+    public String plantilla() {
         return "Plantilla";
     }
+
+//    @GetMapping("/inicio")
+//    public String Inicio() {
+//        return "inicio";
+//    }
 
     @Autowired
     EmpresaService empresaService;
