@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AppController {
@@ -70,7 +71,7 @@ public class AppController {
     @GetMapping("/editarEmpresa/{id}")
     public String editarEmpresa(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
         //Buscar la empresa a editar
-        Empresa empEditar = empresaService.getEmpresaByID(id);
+        Optional<Empresa> empEditar = empresaService.getEmpresaByID(id);
         model.addAttribute("empresaEditada",empEditar);
 
         return "editarEmpresa";
