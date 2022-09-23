@@ -33,12 +33,11 @@ public class AppController {
                 User user = this.userService.gerOrCreateuser(principal.getClaims());
                 model.addAttribute("user",user);
             }
-
             return "index";
     }
     @GetMapping("/plantilla")
     public String plantilla() {
-        return "Plantilla";
+        return "plantilla";
     }
 
 //    @GetMapping("/inicio")
