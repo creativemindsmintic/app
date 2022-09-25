@@ -32,6 +32,10 @@
                         <span class="input-group-text">Monto</span>
                         <input type="number" th:field="*{monto}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
                     </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text">Empleado</span>
+                        <input readonly type="number" th:field="*${user.getEmail()}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
                     <br>
                     <div class="row">
                         <div class="col">
