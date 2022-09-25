@@ -11,9 +11,13 @@ public class MovimientoDinero {
     @ManyToOne
     @JoinColumn(name = "empleado_id")
     Empleado empleado;
+    @Column(name = "tipo_movi", nullable = false)
     TipoMov tipo_movi;
+    @Column(name = "concepto", nullable = false)
     String concepto;
+    @Column(name = "fecha", nullable = false)
     Date fecha;
+    @Column(name = "monto", nullable = false)
     Double monto;
 
     public MovimientoDinero() {
