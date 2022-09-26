@@ -19,6 +19,8 @@ public class Empleado {
     @Column(name = "rol", nullable = false, length = 20)
     private Rol rol;
 
+    private String password;
+
     public Empleado() {
 
     }
