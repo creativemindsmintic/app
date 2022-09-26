@@ -1,12 +1,16 @@
 package com.creativeminds.app.controller;
 
 import com.creativeminds.app.model.*;
+import com.creativeminds.app.repositories.MovimientoRepository;
 import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.EmpresaService;
 import com.creativeminds.app.services.MovimientosService;
 import com.creativeminds.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +21,17 @@ import java.util.List;
 
 @Controller
 public class AppController {
-
+    @Autowired
+    EmpresaService empresaService;
+    @Autowired
+    EmpleadoService empleadoService;
+    @Autowired
+    MovimientosService movimientosService;
+    @Autowired
     UserService userService;
+
+    @Autowired
+    MovimientoRepository movimientoRepository;
 
     public AppController(EmpresaService empresaService, EmpleadoService empleadoService, MovimientosService movimientosService, UserService userService) {
         this.empresaService = empresaService;
@@ -42,8 +55,6 @@ public class AppController {
         return "inicio";
     }
 
-    @Autowired
-    EmpresaService empresaService;
 
     @GetMapping({"/verEmpresas"})
     public String verEmpresas(Model model) {
@@ -85,8 +96,6 @@ public class AppController {
 //        return "redirect:/VerEmpresas";
 //    }
 
-    @Autowired
-    EmpleadoService empleadoService;
 
     @GetMapping({"/verEmpleados"})
     public String verEmpleado(Model model) {
@@ -131,8 +140,6 @@ public class AppController {
         return "redirect:/verEmpleados";
     }
 
-    @Autowired
-    MovimientosService movimientosService;
 
     @GetMapping({"/verMovimientos"})
     public String verMovimientos(Model model) {
@@ -186,6 +193,11 @@ public class AppController {
         }
         redirectAttributes.addFlashAttribute("mensaje", "deleteError");
         return "redirect:/verMovimientos";
+    }
+    //Metodo para encriptar contraseñas
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }
