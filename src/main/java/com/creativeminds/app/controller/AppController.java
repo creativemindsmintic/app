@@ -4,10 +4,10 @@ import com.creativeminds.app.model.*;
 import com.creativeminds.app.services.EmpleadoService;
 import com.creativeminds.app.services.EmpresaService;
 import com.creativeminds.app.services.MovimientosService;
-import com.creativeminds.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,26 +19,15 @@ import java.util.Optional;
 @Controller
 public class AppController {
 
-    UserService userService;
 
-    public AppController(EmpresaService empresaService, EmpleadoService empleadoService, MovimientosService movimientosService, UserService userService) {
+    public AppController(EmpresaService empresaService, EmpleadoService empleadoService, MovimientosService movimientosService) {
         this.empresaService = empresaService;
         this.empleadoService = empleadoService;
         this.movimientosService = movimientosService;
-        this.userService = userService;
     }
+
 
     @GetMapping("/")
-    public String index(Model model, @AuthenticationPrincipal OidcUser principal) {
-            if(principal!=null){
-                User user = this.userService.gerOrCreateuser(principal.getClaims());
-                model.addAttribute("user",user);
-            }
-            return "index";
-    }
-
-
-    @GetMapping("/inicio")
     public String Inicio() {
         return "inicio";
     }
@@ -108,6 +97,8 @@ public class AppController {
 
     @PostMapping({"/guardarEmpleado"})
     public String guardarEmpleado(Empleado nuevoEmpleado, RedirectAttributes redirectAttributes) {
+        String claveEncryptada = passwordEncoder().encode(nuevoEmpleado.getPassword());
+        nuevoEmpleado.setPassword(claveEncryptada);
         if (empleadoService.saveorUpdateEmpleado(nuevoEmpleado) == true) {
             return "redirect:/verEmpleados";
         }
@@ -189,4 +180,13 @@ public class AppController {
         return "redirect:/verMovimientos";
     }
 
+    @GetMapping ("/accesoDenegado")
+    public String accesoDenegado(){
+        return "accesoDenegado";
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 }

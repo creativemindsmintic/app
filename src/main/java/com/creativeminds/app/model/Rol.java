@@ -1,5 +1,5 @@
 package com.creativeminds.app.model;
 
 public enum Rol {
-    Admin, Operario
+    ROLE_Admin, ROLE_Operario
 }
