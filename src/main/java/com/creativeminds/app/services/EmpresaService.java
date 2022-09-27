@@ -25,21 +25,19 @@ public class EmpresaService {
     }
 
     //Metodo para guardar y actualizar
-    public Optional<Empresa> saveorUpdateEmpresa (Empresa empresa){
+    public boolean saveorUpdateEmpresa (Empresa empresa){
         Empresa tmp_emp = empresaRepository.save(empresa);
-        return empresaRepository.findById(tmp_emp.getId());
+        if(empresaRepository.findById(tmp_emp.getId()) != null){
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteEmpresa(Integer id){
-        if(getEmpresaByID(id).isPresent()){
-            empresaRepository.deleteById(id);
-            if(getEmpresaByID(id).isPresent()){
-                return false;
-            }else{
-                return true;
-            }
-        }else {
+        empresaRepository.deleteById(id);
+        if(getEmpresaByID(id)!= null){
             return false;
         }
+        return true;
     }
 }

@@ -1,2 +1,0 @@
-//Scrum Master (o Facilitador/a)
-<p>Es el o la responsable del cumplimiento de las reglas del marco scrum agile. Se asegura que estas son entendidas por la organización y de que se realiza el trabajo conforme a ellas. Elimina los obstáculos que impiden que se desarrolle el objetivo del sprint. Asesora y da la formación necesaria al propietario del producto y al equipo de desarrolladores.</p>
