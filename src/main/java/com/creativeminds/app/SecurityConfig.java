@@ -32,8 +32,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/verMovimientos").hasAnyRole("Admin","Operario")
+                .antMatchers("/verMovimientos/**").hasAnyRole("Admin","Operario")
+                .antMatchers("/crearMovimiento/**").hasRole("Admin")
+                .antMatchers("/editarMovimiento/**").hasRole("Admin")
+                .antMatchers("/eliminarMovimiento/**").hasRole("Admin")
+                .antMatchers("/crearEmpleado/**").hasRole("Admin")
+                .antMatchers("/editarEmpleado/**").hasRole("Admin")
+                .antMatchers("/eliminarEmpleado/**").hasRole("Admin")
+                .antMatchers("/verEmpleados/**").hasRole("Admin")
+                .antMatchers("/crearEmpresa/**").hasRole("Admin")
+                .antMatchers("/editarEmpresa/**").hasRole("Admin")
+                .antMatchers("/eliminarEmpresa/**").hasRole("Admin")
+                .antMatchers("/verEmpresas/**").hasRole("Admin")
                 .antMatchers("/").hasAnyRole("Admin","Operario")
+                .antMatchers("/img/**").hasAnyRole("Admin","Operario")
                 .and().formLogin().successHandler(customSuccessHandler)
                 .and().exceptionHandling().accessDeniedPage("/accesoDenegado")
                 .and().logout().permitAll();
