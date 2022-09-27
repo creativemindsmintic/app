@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crear Movimiento - Creative Minds</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+<main>
+    <div class="container px-2 py-3 my-3"><h1>Información Movimiento</h1></div>
+    <div class="container ">
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/guardarMovimiento}" th:object="${mov}" method="post">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Id</span>
+                        <input readonly type="text" th:field="*{id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Fecha</span>
+                        <input type="date"  th:field="*{fecha}" class="form-control" >
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Concepto</span>
+                        <input type="text" th:field="*{concepto}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" >Tipo de Movimiento</span>
+                        <select th:field="*{tipo_movi}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            <option value="positivo">Ingreso</option>
+                            <option value="negativo">Gasto</option>
+                        </select>
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text">Monto</span>
+                        <input type="text" th:field="*{monto}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text">Empleado</span>
+                        <input readonly type="text" th:field="*{empleado.id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                        <div class="col">
+                            <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atras</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</main>
+</body>
+</html>

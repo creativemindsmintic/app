@@ -1,5 +1,6 @@
 package com.creativeminds.app.services;
 
+import com.creativeminds.app.model.Empleado;
 import com.creativeminds.app.model.MovimientoDinero;
 import com.creativeminds.app.repositories.MovimientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ public class MovimientosService {
     @Autowired
     MovimientoRepository movimientoRepository;
 
-    public List<MovimientoDinero> getAllMovimientos(){ //Metodo que me muestra todos los movimientos sin ningn filtro
+    public List<MovimientoDinero> getAllMovimientos(){
         List<MovimientoDinero> movimientosList = new ArrayList<>();
-        movimientoRepository.findAll().forEach(movimiento -> movimientosList.add(movimiento));  //Recorremos el iterable que regresa el metodo findAll del Jpa y lo guardamos en la lista creada
+        movimientoRepository.findAll().forEach(movimientoDinero -> movimientosList.add(movimientoDinero));
         return movimientosList;
     }
 
@@ -24,9 +25,12 @@ public class MovimientosService {
         return movimientoRepository.findById(id).get();
     }
 
-    public MovimientoDinero saveOrUpdateMovimiento(MovimientoDinero movimientoDinero){ //Guardar o actualizar elementos
-        MovimientoDinero mov=movimientoRepository.save(movimientoDinero);
-        return mov;
+    public boolean saveorUpdateMovimiento(MovimientoDinero movimientoDinero) {
+        MovimientoDinero tmp_mov = movimientoRepository.save(movimientoDinero);
+        if (movimientoRepository.findById(tmp_mov.getId()) != null) {
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteMovimiento(Integer id){ //Eliminar movimiento por id

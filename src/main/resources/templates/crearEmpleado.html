@@ -7,48 +7,89 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container"><h1>Informacion Nuevo Empleado</h1></div>
-    <div class="container ">
-        <div class="row">
-            <div class="col">
-                <form th:action="@{/guardarEmpleado}" th:object="${nuevoEmpleado}" method="post">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text">Nombre Empleado</span>
-                        <input type="text" th:field="*{nombre}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+<div class="container-fluid bg-image" style="background-image:url('img/bk5.jfif');height: 100vh">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a th:href="@{/}" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <img src="img/gastar.png" height="80">
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a th:href="@{/verMovimientos}" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Movimientos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/verEmpleados}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Empleados</span></a>
+                        </li>
+                        <li>
+                            <a th:href="@{/verEmpresas}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Empresas</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src=${user.getImage()} alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="@{/logout}" returnTo="@{/}">Sign out</a></li>
+                        </ul>
                     </div>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text" >Cedula</span>
-                        <input type="text" th:field="*{cedula}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                    </div>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text" >Correo</span>
-                        <input type="text" th:field="*{correo}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                    </div>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text" >Rol</span>
-                        <input type="text" th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                    </div>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text" >Empresa</span>
-                        <input type="text" th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                        <div class="col">
-                            <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atras</a>
-                        </div>
-                        <div class="col">
-                            <a href="#" onclick="limpiar" class="btn btn-secondary">Limpiar</a>
-                        </div>
-                    </div>
-
-                </form>
+                </div>
             </div>
-            <div class="col"></div>
-        </divclas>
-    </div>
+            <div class="container"><h1>Informacion Nuevo Empleado</h1></div>
+            <div class="container ">
+                <div class="row">
+                    <div class="col">
+                        <form th:action="@{/guardarEmpleado}" th:object="${nuevoEmpleado}" method="post">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text">Nombre Empleado</span>
+                                <input type="text" th:field="*{nombre}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text" >Correo</span>
+                                <input type="text" th:field="*{correo}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text" >Password</span>
+                                <input type="password" th:field="*{password}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text" >Rol</span>
+        <!--                        <input type="text" th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">-->
+                                    <select th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                        <option value="ROLE_Admin">Administrador</option>
+                                        <option value="ROLE_Operario">Operario</option>
+                                    </select>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text" >Empresa</span>
+        <!--                        <input type="text" th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">-->
+                                    <select th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                        <option th:each="empresa : ${ListaEmpresas}" th:value="${empresa.id}" th:text="${empresa.nombre}">  </option>
+                                    </select>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                                <div class="col">
+                                    <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atras</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>
