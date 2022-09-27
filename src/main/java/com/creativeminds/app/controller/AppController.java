@@ -65,15 +65,15 @@ public class AppController {
 
         return "editarEmpresa";
     }
-//    @GetMapping("/EliminarEmpresa/{id}")
-//    public String eliminarEmpresa(@PathVariable Integer id, RedirectAttributes redirectAttributes){
-//        if (empresaService.deleteEmpresa(id)==true){
-//            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
-//            return "redirect:/VerEmpresas";
-//        }
-//        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
-//        return "redirect:/VerEmpresas";
-//    }
+    @GetMapping("/eliminarEmpresa/{id}")
+    public String eliminarEmpresa(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        if (empresaService.deleteEmpresa(id)==true){
+            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
+            return "redirect:/verEmpresas";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/verEmpresas";
+    }
 
     @Autowired
     EmpleadoService empleadoService;

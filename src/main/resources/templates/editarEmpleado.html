@@ -40,14 +40,10 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid " width="80%"><h1>Informacion Empleado</h1>
+        <div class="container-fluid " width="80%"><h1>Información Empleado</h1>
             <div class="row">
                 <div class="col">
                     <form th:action="@{/guardarEmpleado}" th:object="${empleadoEditado}" method="post">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-text">Id</span>
-                            <input readonly type="text" th:field="*{id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                        </div>
                         <div class="input-group input-group-lg">
                             <span class="input-group-text">Nombre Empleado</span>
                             <input type="text" th:field="*{nombre}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
@@ -57,15 +53,21 @@
                             <input type="text" th:field="*{correo}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
                         </div>
                         <div class="input-group input-group-lg">
+                            <span class="input-group-text" >Password</span>
+                            <input type="password" th:field="*{password}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                        </div>
+                        <div class="input-group input-group-lg">
                             <span class="input-group-text" >Rol</span>
-                                 <select th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                                     <option value="ROLE_Admin">Administrador</option>
-                                     <option value="ROLE_Operario">Operario</option>
-                                </select>
+                            <select th:field="*{rol}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                <option value="ROLE_Admin">Administrador</option>
+                                <option value="ROLE_Operario">Operario</option>
+                            </select>
                         </div>
                         <div class="input-group input-group-lg">
                             <span class="input-group-text" >Empresa</span>
-                            <input readonly type="text" th:field="*{empresa.id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            <select th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                <option th:each="empresa : ${ListaEmpresas}" th:value="${empresa.id}" th:text="${empresa.nombre}">  </option>
+                            </select>
                         </div>
                         <br>
                         <div class="row">
