@@ -10,26 +10,48 @@ public class Empleado {
     private int id;
     @Column(name = "nombre", nullable = false, length = 80)
     private String nombre;
-    @Column(name = "correo", nullable = false, length = 50)
+    @Column(name = "correo", nullable = false, length = 50, unique = true)
     private String correo;
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
+    @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
-    private String rol;
+    private Rol rol;
 
-    @Column(name = "cedula", nullable = false, length = 20)
-    private String cedula;
-    public Empleado(){
+    private String password;
+    private Boolean estado = true;
+
+
+    public Empleado() {
 
     }
 
-    public Empleado(String nombre, String correo, Empresa empresa, String rol, String cedula) {
+    public Empleado(String nombre, String correo, Empresa empresa, Rol rol, String password, Boolean estado) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rol = rol;
-        this.cedula = cedula;
+        this.password = password;
+        this.estado = estado;
+
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public int getId() {
@@ -64,19 +86,13 @@ public class Empleado {
         this.empresa = empresa;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    public String getCedula() {
-        return cedula;
-    }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
 }
