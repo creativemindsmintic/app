@@ -42,7 +42,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         if (esAdministrativo(roles)) {
             url = "/";
         } else if (esOperario(roles)) {
-            url = "/VerMovimientos";
+            url = "/verMovimientos";
         } else {
             url = "/accesoDenegado";
         }

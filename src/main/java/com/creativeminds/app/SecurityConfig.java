@@ -29,15 +29,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("SELECT correo,rol FROM empleado WHERE correo=?");
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/img/**").permitAll()
-                .antMatchers("/logout").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/verMovimientos").hasAnyRole("Admin","Operario")
-                .antMatchers("/").hasAnyRole("Admin","Operario")
-                .and().formLogin().successHandler(customSuccessHandler)
-                .and().exceptionHandling().accessDeniedPage("/accesoDenegado");
-    }
+
 }
