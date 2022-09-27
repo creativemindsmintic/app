@@ -25,9 +25,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(dataSource)
-                .usersByUsernameQuery("SELECT correo,password,rol FROM empleado WHERE correo=?")
+                .usersByUsernameQuery("SELECT correo,password,estado FROM empleado WHERE correo=?")
                 .authoritiesByUsernameQuery("SELECT correo,rol FROM empleado WHERE correo=?");
     }
 
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/verMovimientos").hasAnyRole("Admin","Operario")
+                .antMatchers("/").hasAnyRole("Admin","Operario")
+                .and().formLogin().successHandler(customSuccessHandler)
+                .and().exceptionHandling().accessDeniedPage("/accesoDenegado")
+                .and().logout().permitAll();
+    }
 }
