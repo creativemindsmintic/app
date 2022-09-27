@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/eliminarEmpresa/**").hasRole("Admin")
                 .antMatchers("/verEmpresas/**").hasRole("Admin")
                 .antMatchers("/").hasAnyRole("Admin","Operario")
-                .antMatchers("/img/**").hasAnyRole("Admin","Operario")
+                .antMatchers("/static/img/**").authenticated()
                 .and().formLogin().successHandler(customSuccessHandler)
                 .and().exceptionHandling().accessDeniedPage("/accesoDenegado")
                 .and().logout().permitAll();
