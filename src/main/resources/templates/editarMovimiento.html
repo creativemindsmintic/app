@@ -59,8 +59,8 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-text" >Tipo de Movimiento</span>
                             <select th:field="*{tipo_movi}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                                <option value="positivo">Ingreso</option>
-                                <option value="negativo">Gasto</option>
+                                <option value="Ingreso">Ingreso</option>
+                                <option value="Egreso">Gasto</option>
                             </select>
                         </div>
                         <div class="input-group input-group-lg">
@@ -68,8 +68,10 @@
                             <input type="text" th:field="*{monto}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
                         </div>
                         <div class="input-group input-group-lg">
-                            <span class="input-group-text">Empleado</span>
-                            <input readonly type="text" th:field="*{empleado.id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                            <span class="input-group-text" >Empleado</span>
+                            <select th:field="*{empleado}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                                <option th:each="tmp_empleado : ${emplelist}" th:value="${tmp_empleado.id}" th:text="${tmp_empleado.nombre}" th:selected="${tmp_empleado.id}==*{empleado}">  </option>
+                            </select>
                         </div>
                         <br>
                         <div class="row">

@@ -106,9 +106,11 @@ public class AppController {
     }
     @GetMapping("/editarEmpleado/{id}")
     public String editarEmpleado(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
+        List<Empresa> listaEmpresas = empresaService.getAllEmpresas();
         //Buscar empleado a editar
         Empleado empleadoEditar = empleadoService.getEmpleadoByID(id);
         model.addAttribute("empleadoEditado",empleadoEditar);
+        model.addAttribute("ListaEmpresas",listaEmpresas);
 
         return "editarEmpleado";
     }

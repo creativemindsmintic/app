@@ -45,6 +45,10 @@
                 <div class="col">
                     <form th:action="@{/guardarEmpleado}" th:object="${empleadoEditado}" method="post">
                         <div class="input-group input-group-lg">
+                            <span class="input-group-text">Id</span>
+                            <input readonly type="text" th:field="*{id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
+                        </div>
+                        <div class="input-group input-group-lg">
                             <span class="input-group-text">Nombre Empleado</span>
                             <input type="text" th:field="*{nombre}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
                         </div>
@@ -66,7 +70,7 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-text" >Empresa</span>
                             <select th:field="*{empresa}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
-                                <option th:each="empresa : ${ListaEmpresas}" th:value="${empresa.id}" th:text="${empresa.nombre}">  </option>
+                                <option th:each="tmp_empresa : ${ListaEmpresas}" th:value="${tmp_empresa.id}" th:text="${tmp_empresa.nombre}" th:selected="${tmp_empresa.id}==*{empresa}">  </option>
                             </select>
                         </div>
                         <br>
